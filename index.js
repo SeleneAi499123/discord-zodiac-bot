@@ -1,8 +1,11 @@
 const { Client, GatewayIntentBits } = require("discord.js");
-const { token } = require("./config.json");
 const axios = require("axios");
 const cheerio = require("cheerio");
+require('dotenv').config();
 
+const config = {
+    token: process.env.DISCORD_BOT_TOKEN
+};
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -122,4 +125,4 @@ client.on("messageCreate", async (message) => {
   }
 });
 
-client.login(token);
+client.login(config.token);
