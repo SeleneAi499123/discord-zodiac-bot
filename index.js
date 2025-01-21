@@ -1,7 +1,11 @@
+require('dotenv').config();
 const { Client, GatewayIntentBits } = require("discord.js");
 const axios = require("axios");
 const cheerio = require("cheerio");
-require('dotenv').config();
+const express = require('express')
+
+const app = express()
+const port = process.env.PORT || 4000;
 
 const config = {
     token: process.env.DISCORD_BOT_TOKEN
@@ -123,6 +127,10 @@ client.on("messageCreate", async (message) => {
       }
     }
   }
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
 
 client.login(config.token);
