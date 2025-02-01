@@ -135,6 +135,10 @@ client.on("messageCreate", async (message) => {
 
 client.login(config.token);
 
+app.get("/", (req, res) => {
+  res.send("Hello, Render!");
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
