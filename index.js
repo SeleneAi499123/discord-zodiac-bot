@@ -126,6 +126,10 @@ client.on("messageCreate", async (message) => {
         message.channel.send("抱歉，獲取運勢時發生錯誤。");
       }
     }
+    // else {
+    //   await message.channel.send(`別吵我，我正在思考人生。`);
+    //   break;
+    // }
   }
 });
 
