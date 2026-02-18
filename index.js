@@ -131,6 +131,32 @@ client.on("messageCreate", async (message) => {
     //   break;
     // }
   }
+    catch (error) {
+    console.error("爬取運勢時發生錯誤：", error.message);
+
+    // 連線逾時
+    if (error.code === "ECONNABORTED") {
+      return "抱歉，連接超時，請稍後再試。";
+    }
+
+    // 有回應但狀態碼錯誤（例如 404、403）
+    if (error.response) {
+      const status = error.response.status;
+
+      if (status === 404) {
+        return "抱歉，目前找不到該星座的運勢頁面，網站可能已改版。";
+      }
+
+      if (status === 403) {
+        return "抱歉，網站拒絕存取，可能已更改防爬機制。";
+      }
+
+      return `抱歉，網站回傳錯誤（${status}），暫時無法取得運勢。`;
+    }
+
+    // 其他錯誤
+    return "抱歉，無法獲取運勢資訊，請稍後再試。";
+  }
 });
 
 client.login(config.token);
